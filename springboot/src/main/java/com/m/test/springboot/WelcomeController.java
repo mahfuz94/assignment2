@@ -1,6 +1,8 @@
 package com.m.test.springboot;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -142,5 +144,44 @@ public class WelcomeController {
 	public ModelAndView admin() {
 		ModelAndView mv = new ModelAndView("adminPanel");
 		return mv;
+	}
+	
+	@RequestMapping("/sortby/firstName")
+	public String sortByFirstName() {
+		Collections.sort(userList, new Comparator<User>() {
+
+			@Override
+			public int compare(User o1, User o2) {
+				return o1.getFirstName().compareToIgnoreCase(o2.getFirstName());
+			}
+			
+		});
+		return "redirect:/author/admin/viewalluser";
+	}
+	
+	@RequestMapping("/sortby/lastName")
+	public String sortByLastName() {
+		Collections.sort(userList, new Comparator<User>() {
+
+			@Override
+			public int compare(User o1, User o2) {
+				return o1.getLastName().compareToIgnoreCase(o2.getLastName());
+			}
+			
+		});
+		return "redirect:/author/admin/viewalluser";
+	}
+	
+	@RequestMapping("/sortby/phoneNumber")
+	public String sortByPhoneNumber() {
+		Collections.sort(userList, new Comparator<User>() {
+
+			@Override
+			public int compare(User o1, User o2) {
+				return o1.getPhoneNumber().compareToIgnoreCase(o2.getPhoneNumber());
+			}
+			
+		});
+		return "redirect:/author/admin/viewalluser";
 	}
 }
