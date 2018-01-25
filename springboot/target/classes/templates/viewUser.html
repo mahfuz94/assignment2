@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title>Insert title here</title>
+	<div th:replace="fragments/header :: header-css"></div>
+</head>
+<body>
+
+	<div th:replace="fragments/header :: header"></div>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-offset-4 col-md-10">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						User Details
+					</div>
+					<div class="panel-body">
+						<table class="table table-bordered" border="1">
+							<thead>
+								<tr>
+									<th><a th:href="@{/sortby/firstName}">First Name</a></th>
+									<th><a th:href="@{/sortby/lastName}">Last Name</a></th>
+									<th><a th:href="@{/sortby/phoneNumber}">Phone Number</a></th>
+									<th><a th:href="@{/sortby/email}">Email</a></th>
+									<th><a th:href="@{/sortby/password}">Password</a></th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<div th:each="userList, state : *{userList}">
+								<tr>
+									<td th:text="${userList.firstName}"></td>
+									<td th:text="${userList.lastName}"></td>
+									<td th:text="${userList.phoneNumber}"></td>
+									<td th:text="${userList.email}"></td>
+									<td th:text="${userList.password}"></td>
+									<td>
+										<form th:action="@{/author/admin/edit/__${state.index}__/user}">
+											<input type="submit" class="btn btn-primary" value="Edit"/>
+										</form>
+										<form th:action="@{/author/admin/delete/__${state.index}__/user}">
+											<input type="hidden" th:value="${state.index}"/>
+											<input type="submit" class="btn btn-primary" value="Delete"/>
+										</form>
+									</td>
+								</tr>
+								</div>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+<!-- 	<div th:each="userList, stat : *{userList}">
+
+		<h2 th:text="${userList.lastName}"></h2>
+		
+	</div>  -->
+	
+
+	<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

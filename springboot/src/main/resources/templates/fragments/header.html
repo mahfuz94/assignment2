@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <div th:fragment="header-css">
 	<!-- this is header-css -->
@@ -22,7 +23,12 @@
 						<li class="active"><a th:href="@{/}">Home</a></li>
 						<li><a th:href="@{/about}">About</a></li>
 					</ul>
-
+					<ul class="nav navbar-nav">
+						<li sec:authorize="hasAuthority('ROLE_ADMIN')"><a th:href="@{/author/admin/adduser}">Add User</a></li>
+					</ul>
+					<ul class="nav navbar-nav">
+						<li sec:authorize="hasAuthority('ROLE_ADMIN')"><a th:href="@{/author/admin/viewalluser}">View All User</a></li>
+					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li sec:authorize="isAnonymous()"><a th:href="@{/login}">Login</a></li>
 					</ul>
